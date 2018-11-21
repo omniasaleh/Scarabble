@@ -38,9 +38,9 @@ double calcProbability(int freq[], int score, Bag b, int cur[]) {
 		// cur[i] hya el 7rof eli m3aya
 		freq[i] -= cur[i];
 		cnt += freq[i];
-		letterP *= J.pascal[b.bag[i]][freq[i]];
+		letterP *= J.pascal[b.getTieCount()][freq[i]];
 	}
-	letterP /= (J.pascal[b.bagSize][cnt] * 1.0);
+	letterP /= (J.pascal[b.bagLen()][cnt] * 1.0);
 	// multiply by 2.5 if the score isn't calculated for the board
 	return letterP * (50 + score);
 }
@@ -324,7 +324,7 @@ long double change(Bag & bag, Player & ply, vector<char> tiles) {
 }
 long double ProbabilisticSearch(int idx, Board & board, bool game, Player ana,
 		Player opponent, Bag & bag, int cnt) {
-	if (board.close() || idx >= depth || cnt >= 2) {	////////
+	if (J.isClosed(board) || idx >= depth || cnt >= 2) {	////////
 		return huristicBoard(board);
 		// mfrod azod 7aga hna huristic of board
 	}
